@@ -6,11 +6,11 @@ Servidor HTTP básico desarrollado en C++.
 
 1.- Si no lo tenemos, instalar el g++:
 
-- ```sudo apt-get install g++```
+  - ```sudo apt-get install g++```
 
 2.- Navegar a la ruta del archivo y ejecutar:
 
--```g++ MyHTTPServer.cc -o MyHTTPServer```
+  - ```g++ MyHTTPServer.cc -o MyHTTPServer```
 
 # Istrucciones de configuración del repositorio en Ubuntu:
 
@@ -28,9 +28,7 @@ Servidor HTTP básico desarrollado en C++.
 
   - ```git clone https://github.com/DanielFinestrat/MiniServidorHTTP```
 
-4.- Te pedirá tus datos de GitHub, introducirlos.
-
-5.- Editar, y al terminar usar:
+4.- Editar, y al terminar usar:
 
 - Para añadir los cambios (Todos los archivos):
 
@@ -44,11 +42,11 @@ Servidor HTTP básico desarrollado en C++.
 
   - ```git commit -m "Mensaje de Actualziación"```
 
-- Para subirlo a la rama:
+- Para subirlo a la rama (te pedira tus datos de usuario de GitHub, introdúcelos):
 
   - ```git push```
 
-6.- Si regresamos después de un tiempo, para actualizar nuestro clon usar:
+5.- Si regresamos después de un tiempo, para actualizar nuestro clon usar:
 
   - ```git pull```
 
