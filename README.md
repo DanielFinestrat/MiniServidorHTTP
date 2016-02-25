@@ -22,9 +22,13 @@ ___
 
 5.- Editar, y al terminar usar:
 
-- Para añadir los cambios
+- Para añadir los cambios (Todos los archivos):
 
 ```git add -A```
+
+- Para añadir los cambios (Solo algunos archivos específicos):
+
+```git add nombreArchivo```
 
 - Para ponerle un mensaje a la actualziación:
 
@@ -33,4 +37,8 @@ ___
 - Para subirlo a la rama:
 
 ```git push```
+
+6.- Si regresamos después de un tiempo, para actualizar nuestro clon usar:
+
+```git pull```
 ___
