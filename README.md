@@ -2,6 +2,16 @@
 
 Servidor HTTP básico desarrollado en C++.
 
+# Instrucciones de Compilación:
+
+1.- Si no lo tenemos, instalar el g++:
+
+- ```sudo apt-get install g++```
+
+2.- Navegar a la ruta del archivo y ejecutar:
+
+-```g++ MyHTTPServer.cc -o MyHTTPServer```
+
 # Istrucciones de configuración del repositorio en Ubuntu:
 
 1.- Descargar Git: 
