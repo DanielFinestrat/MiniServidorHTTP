@@ -10,7 +10,7 @@ Servidor HTTP básico desarrollado en C++.
 
 2.- Navegar a la ruta del archivo y ejecutar:
 
-  - ```g++ MyHTTPServer.cc -o MyHTTPServer```
+  - ```g++ MyHTTPServer.cc -o http_server```
 
 # Istrucciones de configuración del repositorio en Ubuntu:
 
