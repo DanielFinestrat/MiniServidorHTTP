@@ -1,4 +1,4 @@
-# ServidorBasicoHTTP
+# MiniServidorHTTP
 
 Servidor HTTP básico desarrollado en C++.
 
@@ -41,3 +41,6 @@ Servidor HTTP básico desarrollado en C++.
 6.- Si regresamos después de un tiempo, para actualizar nuestro clon usar:
 
   - ```git pull```
+
+___
+2016
