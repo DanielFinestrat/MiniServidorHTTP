@@ -1,7 +1,7 @@
 # ServidorBasicoHTTP
+
 Servidor HTTP básico desarrollado en C++.
 
-___
 # Istrucciones de configuración del repositorio en Ubuntu:
 
 1.- Descargar Git: 
@@ -10,9 +10,9 @@ ___
 
 2.- Configurar nombre y correo:
 
-```git config --global user.name "miNombre"```
+```sudo git config --global user.name "miNombre"```
 
-```git config --global user.email "miEmail@miDominio.com"```
+```sudo git config --global user.email "miEmail@miDominio.com"```
 
 3.- Navegar a la carpeta y clonar el repositorio:
 
@@ -41,4 +41,3 @@ ___
 6.- Si regresamos después de un tiempo, para actualizar nuestro clon usar:
 
 ```git pull```
-___
