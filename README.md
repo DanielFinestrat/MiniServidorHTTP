@@ -2,7 +2,7 @@
 Servidor HTTP básico desarrollado en C++.
 
 ___
-# Istrucciones de configuración de Git y GitHub en Ubuntu:
+# Istrucciones de configuración del repositorio en Ubuntu:
 
 1.- Descargar Git: 
 
