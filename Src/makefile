@@ -1,14 +1,19 @@
+all: http_server
+
 http_server: MyHTTPServer.o funcionesDaniel.o funcionesAlejandro.o funcionesAngel.o
-    gcc -o http_server MyHTTPServer.o funcionesDaniel.o funcionesAlejandro.o funcionesAngel.o
+	g++ -o http_server MyHTTPServer.o funcionesDaniel.o funcionesAlejandro.o funcionesAngel.o
 
-MyHTTPServer.o: MyHTTPServer.c cabecera.h
-    gcc -c MyHTTPServer.c
+MyHTTPServer.o: MyHTTPServer.cc cabecera.h
+	g++ -c MyHTTPServer.cc
 
-funcionesDaniel.o: funcionesDaniel.c cabecera.h
-    gcc -c funcionesDaniel.c
+funcionesDaniel.o: funcionesDaniel.cc cabecera.h
+	g++ -c funcionesDaniel.cc
 
-funcionesAlejandro.o: funcionesAlejandro.c cabecera.h
-    gcc -c funcionesAlejandro.c
+funcionesAlejandro.o: funcionesAlejandro.cc cabecera.h
+	g++ -c funcionesAlejandro.cc
 
-funcionesAngel.o: funcionesAngel.c cabecera.h
-    gcc -c funcionesAngel.c
+funcionesAngel.o: funcionesAngel.cc cabecera.h
+	g++ -c funcionesAngel.cc
+
+clean:
+	rm *o http_server
