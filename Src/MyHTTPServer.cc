@@ -5,11 +5,6 @@ using namespace std;
 int main(int argc, char *argv[]){
 
 	if(comprobarArgumentos(argc) == 1) return 1;
-	return 0;
-
-}
-
-/*
 
 // Leer el archivo de configuracion del servidor
 
@@ -64,3 +59,8 @@ int main(int argc, char *argv[]){
 // Esperar conexiones
 
 */
+
+
+	return 0;
+
+}
