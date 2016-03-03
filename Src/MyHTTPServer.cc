@@ -6,18 +6,19 @@ using namespace std;
 int main(int argc, char *argv[]){
 
 	string documentRoot;    //Nos indica donde estan los archivos
-	string rutaConf;	//Nos indica donde esta el fichero de configuracion
+	string rutaConf = "";	//Nos indica donde esta el fichero de configuracion
 	string pagina;          //Pagina que por defecto que se envia si no se indica otra
 	int maxclients;         //Es el número maximo de procesos que lanzará el servidor
 	int puerto;             //Puerto en el que escuchará el servidor
 
 	//Manejamos los argumentos
-	if(comprobarArgumentos(argc, argv, rutaConf, puerto) == 1) return 1;
+	if(manageArguments(argc, argv, rutaConf, puerto) == 1) return 1;
+	cout<< "Ruta = " << rutaConf << " Puerto = " << puerto << " " <<endl;
 	
 	leerDatos(rutaConf, &documentRoot, &maxclients, &puerto, &pagina);
 
 	//Prueba de que funciona
-	cout<< documentRoot <<" "<<maxclients<<" "<<puerto<<" "<<pagina;
+	//cout<< documentRoot <<" "<<maxclients<<" "<<puerto<<" "<<pagina<<endl;
 
 	
 	return 0;
