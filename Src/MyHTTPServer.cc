@@ -1,7 +1,10 @@
 #include <iostream>
 #include <string>
+#include <sys/socket.h>
 #include "cabecera.h"
 using namespace std;
+
+int miSocket; //Nuestro socket, variable global
 
 int main(int argc, char *argv[]){
 
@@ -9,40 +12,24 @@ int main(int argc, char *argv[]){
 	string rutaConf = "";	//Nos indica donde esta el fichero de configuracion
 	string pagina;          //Pagina que por defecto que se envia si no se indica otra
 	int maxclients;         //Es el número maximo de procesos que lanzará el servidor
-	int puerto;             //Puerto en el que escuchará el servidor
+	int puerto = 6000;      //Puerto en el que escuchará el servidor (Por defecto 6000)
 
 	//Manejamos los argumentos, si no hay ruta del fichero establecida, devolvera un string vacio ("")
 	if(manageArguments(argc, argv, rutaConf, puerto) == 1) return 1;
 	
 	leerDatos(rutaConf, &documentRoot, &maxclients, &puerto, &pagina);
-
 	//Prueba de que funciona
 	//cout<< documentRoot <<" "<<maxclients<<" "<<puerto<<" "<<pagina<<endl;
 
+	//Inicializamos el socket y comprobamos errores
+	miSocket = inicializarSocket(); if(miSocket == -1) return 1;
 	
 	return 0;
 
-
-// Declaramos las variables necesarias
-
-	/*int Socket;
-	int Puerto = argv[1];
-	struct Direccion;*/
-
-
-// Abrimos el socket
-
-	/*Socket = socket(AF_INET, SOCK_STREAM, 0);
-	if(Socket == -1){
-		printf(stderr, "Error. El socket no se ha abierto correctamente\n\r");
-	}
-	else{
-		printf("Socket abierto\n\r");
-	}*/
-
-// Enlazamos una IP y un puerto al socket
-
-	/*Direccion.sin_family = AF_INET;
+	// Enlazamos una IP y un puerto al socket
+	/*
+	struct Direccion;
+	Direccion.sin_family = AF_INET;
 	Direccion.sin_port = htons(Puerto);
 	Direccion.sin_addr.s_addr = INADDR_ANY;
 
@@ -53,19 +40,20 @@ int main(int argc, char *argv[]){
 	}
 	else{
 		fprintf("Puerto de escucha establecido\n\r");
-	}*/
+	}
+	*/
 
-// Preparamos el servidor para empezar a escuchar
 
-	/*if(listen(Socket, Maxclients) == -1){
+	// Preparamos el servidor para empezar a escuchar
+	/*
+	if(listen(Socket, Maxclients) == -1){
 		fprintf(stderr, "Error preparando el servidor\n\r");
 		close(Socket);
 		return(1);
 	}
 	else{
 		fprintf("Servidor preparado correctamente\n\r");
-	}*/
-
-// Esperar conexiones
+	}
+	*/
 
 }
