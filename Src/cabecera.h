@@ -1,2 +1,2 @@
-void comprobarArgumentos(int argc);
+int comprobarArgumentos(int argc);
 void leerDatos();

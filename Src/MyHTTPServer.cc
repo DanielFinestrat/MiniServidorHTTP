@@ -15,24 +15,24 @@ int main(int argc, char *argv[]){
 
 // Declaramos las variables necesarias
 
-	int Socket;
+	/*int Socket;
 	int Puerto = argv[1];
-	struct Direccion;
+	struct Direccion;*/
 
 
 // Abrimos el socket
 
-	Socket = socket(AF_INET, SOCK_STREAM, 0);
+	/*Socket = socket(AF_INET, SOCK_STREAM, 0);
 	if(Socket == -1){
 		printf(stderr, "Error. El socket no se ha abierto correctamente\n\r");
 	}
 	else{
 		printf("Socket abierto\n\r");
-	}
+	}*/
 
 // Enlazamos una IP y un puerto al socket
 
-	Direccion.sin_family = AF_INET;
+	/*Direccion.sin_family = AF_INET;
 	Direccion.sin_port = htons(Puerto);
 	Direccion.sin_addr.s_addr = INADDR_ANY;
 
@@ -43,23 +43,20 @@ int main(int argc, char *argv[]){
 	}
 	else{
 		fprintf("Puerto de escucha establecido\n\r");
-	}
+	}*/
 
 // Preparamos el servidor para empezar a escuchar
 
-	if(listen(Socket, Maxclients) == -1){
+	/*if(listen(Socket, Maxclients) == -1){
 		fprintf(stderr, "Error preparando el servidor\n\r");
 		close(Socket);
 		return(1);
 	}
 	else{
 		fprintf("Servidor preparado correctamente\n\r");
-	}
+	}*/
 
 // Esperar conexiones
-
-*/
-
 
 	return 0;
 
