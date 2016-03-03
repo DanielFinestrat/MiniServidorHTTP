@@ -20,7 +20,7 @@ int CharToInt(char cadena[16]){
 
 void leerDatos(string archivo, string* DocumentRoot, int* Maxclients, int* Puerto, string* Pagina){
 
-    char cadena1[128];
+    /*char cadena1[128];
     char cadena2[16];
     
     ifstream fe(archivo);
@@ -31,7 +31,7 @@ void leerDatos(string archivo, string* DocumentRoot, int* Maxclients, int* Puert
     fe.getline(cadena2, 16);
     *Puerto = CharToInt(cadena2);
     fe.getline(cadena1, 128);
-    *Pagina = cadena1;
+    *Pagina = cadena1;*/
     
 }
 

@@ -1,9 +1,10 @@
 #include <iostream>
+#include <string>
 #include "cabecera.h"
 using namespace std;
 
 // Maneja los argumentos y saca del programa si la sintaxis es erronea
-int comprobarArgumentos(int argc){
+int comprobarArgumentos(int argc, char *argv[], string &rutaConf, int &puerto){
 	int toRet = 0;
 
 	if (argc != 4){

@@ -1,31 +1,26 @@
 #include <iostream>
+#include <string>
 #include "cabecera.h"
 using namespace std;
 
 int main(int argc, char *argv[]){
 
-	if(comprobarArgumentos(argc) == 1) return 1;
+	string documentRoot;    //Nos indica donde estan los archivos
+	string rutaConf;	//Nos indica donde esta el fichero de configuracion
+	string pagina;          //Pagina que por defecto que se envia si no se indica otra
+	int maxclients;         //Es el número maximo de procesos que lanzará el servidor
+	int puerto;             //Puerto en el que escuchará el servidor
+
+	//Manejamos los argumentos
+	if(comprobarArgumentos(argc, argv, rutaConf, puerto) == 1) return 1;
 	
-	// Leer el archivo de configuracion del servidor
-    
-    string DocumentRoot;    //Nos indica donde estan los archivos
-    int Maxclients;         //Es el número maximo de procesos que lanzará el servidor
-    int Puerto;             //Puerto en el que escuchará el servidor
-    string Pagina;          //Pagina que por defecto que se envia si no se indica otra
-    
-    
-    //Paso a String el argumento de la página
-    
-    
-    string archivo(argv[3]);
-    leerDatos(archivo, &DocumentRoot, &Maxclients, &Puerto, &Pagina);
-    
-    
-    //Prueba de que funciona
-    cout<< DocumentRoot <<" "<<Maxclients<<" "<<Puerto<<" "<<Pagina;
+	leerDatos(rutaConf, &documentRoot, &maxclients, &puerto, &pagina);
+
+	//Prueba de que funciona
+	cout<< documentRoot <<" "<<maxclients<<" "<<puerto<<" "<<pagina;
 
 	
-
+	return 0;
 
 
 // Declaramos las variables necesarias
@@ -72,7 +67,5 @@ int main(int argc, char *argv[]){
 	}*/
 
 // Esperar conexiones
-
-	return 0;
 
 }

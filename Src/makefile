@@ -16,4 +16,5 @@ funcionesAngel.o: funcionesAngel.cc cabecera.h
 	g++ -c funcionesAngel.cc
 
 clean:
-	rm *.o
+	rm -rf *.o
+	rm -rf *~
