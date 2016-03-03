@@ -5,13 +5,28 @@ using namespace std;
 int main(int argc, char *argv[]){
 
 	if(comprobarArgumentos(argc) == 1) return 1;
+	
+	// Leer el archivo de configuracion del servidor
+    
+    string DocumentRoot;    //Nos indica donde estan los archivos
+    int Maxclients;         //Es el número maximo de procesos que lanzará el servidor
+    int Puerto;             //Puerto en el que escuchará el servidor
+    string Pagina;          //Pagina que por defecto que se envia si no se indica otra
+    
+    
+    //Paso a String el argumento de la página
+    
+    
+    string archivo(argv[3]);
+    leerDatos(archivo, &DocumentRoot, &Maxclients, &Puerto, &Pagina);
+    
+    
+    //Prueba de que funciona
+    cout<< DocumentRoot <<" "<<Maxclients<<" "<<Puerto<<" "<<Pagina;
 
-// Leer el archivo de configuracion del servidor
+	
 
-	 //DocumentRoot que nos indique donde estan los archivos
-	 //Maxclients que será el número maximo de procesos que lanzará el servidor
-	 //Puerto en el que escuchará el servidor
-	 //Página por defecto que se envia si no se indica otra
+
 
 // Declaramos las variables necesarias
 
