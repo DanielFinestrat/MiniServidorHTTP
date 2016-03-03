@@ -1,0 +1,2 @@
+void comprobarArgumentos();
+void leerDatos();
