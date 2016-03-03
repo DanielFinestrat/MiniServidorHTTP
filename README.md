@@ -1,6 +1,6 @@
 # MiniServidorHTTP
 
-Servidor HTTP básico desarrollado en C++.
+Servidor HTTP básico desarrollado en C++
 
 # Instrucciones de Compilación:
 
