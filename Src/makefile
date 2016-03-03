@@ -1,4 +1,4 @@
-all: http_server
+all: http_server clean
 
 http_server: MyHTTPServer.o funcionesDaniel.o funcionesAlejandro.o funcionesAngel.o
 	g++ -o http_server MyHTTPServer.o funcionesDaniel.o funcionesAlejandro.o funcionesAngel.o
@@ -16,4 +16,4 @@ funcionesAngel.o: funcionesAngel.cc cabecera.h
 	g++ -c funcionesAngel.cc
 
 clean:
-	rm *o http_server
+	rm *o
