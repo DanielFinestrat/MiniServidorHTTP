@@ -30,14 +30,12 @@ int main(int argc, char *argv[]){
 	
 	leerDatos(rutaConf, &documentRoot, &maxclients, &puerto, &pagina);
 	//Prueba de que funciona
-	cout<< "Datos configuracion: " << documentRoot <<" "<<maxclients<<" "<<puerto<<" "<<pagina<<endl;
+	cout<< "Datos configuracion -- DocRot: " << documentRoot <<" MaxClients: "<<maxclients<<" Puerto: "<<puerto<<" Pagina: "<<pagina<<endl;
 
 	//Inicializamos el socket y comprobamos errores
 	miSocket = inicializarSocket(); if(miSocket == -1) return 1;
 	
-
 	// Enlazamos una IP y un puerto al socket
-	
 	struct sockaddr_in Direccion;
 	Direccion.sin_family = AF_INET;
 	Direccion.sin_port = htons(puerto);
@@ -47,23 +45,18 @@ int main(int argc, char *argv[]){
 		cout << "Error. No se puede asociar el puerto al socket\n\r" ;
 		close(miSocket);
 		return(1);
-	}
-	else{
-        cout <<"Puerto de escucha establecido\n\r";
-	}
+	}else cout <<"Puerto de escucha establecido\n\r";
 
 
 	// Preparamos el servidor para empezar a escuchar
-	
 	if(listen(miSocket, maxclients) == -1){
 		cout << "Error preparando el servidor\n\r";
 		close(miSocket);
 		return(1);
 	}
-	else{
-		cout << "Servidor preparado correctamente\n\r";
-	}
-	
-    return 0;
+	else cout << "Servidor preparado correctamente\n\r";
+
+	close(miSocket);
+	return 0;
 }
 
