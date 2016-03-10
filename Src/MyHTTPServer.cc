@@ -1,3 +1,14 @@
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <signal.h>
+
+
+
 #include <iostream>
 #include <string>
 #include <sys/socket.h>
@@ -19,41 +30,40 @@ int main(int argc, char *argv[]){
 	
 	leerDatos(rutaConf, &documentRoot, &maxclients, &puerto, &pagina);
 	//Prueba de que funciona
-	//cout<< documentRoot <<" "<<maxclients<<" "<<puerto<<" "<<pagina<<endl;
+	cout<< "Datos configuracion: " << documentRoot <<" "<<maxclients<<" "<<puerto<<" "<<pagina<<endl;
 
 	//Inicializamos el socket y comprobamos errores
 	miSocket = inicializarSocket(); if(miSocket == -1) return 1;
 	
-	return 0;
 
 	// Enlazamos una IP y un puerto al socket
-	/*
-	struct Direccion;
+	
+	struct sockaddr_in Direccion;
 	Direccion.sin_family = AF_INET;
-	Direccion.sin_port = htons(Puerto);
+	Direccion.sin_port = htons(puerto);
 	Direccion.sin_addr.s_addr = INADDR_ANY;
 
-	if(bind(Socket, (struct sockaddr *)&Direccion, sizeof (Direccion)) == -1){
-		fprintf(stderr, "Error. No se puede asociar el puerto al socket\n\r");
-		close(Socket);
+	if(bind(miSocket, (struct sockaddr *)&Direccion, sizeof (Direccion)) == -1){
+		cout << "Error. No se puede asociar el puerto al socket\n\r" ;
+		close(miSocket);
 		return(1);
 	}
 	else{
-		fprintf("Puerto de escucha establecido\n\r");
+        cout <<"Puerto de escucha establecido\n\r";
 	}
-	*/
 
 
 	// Preparamos el servidor para empezar a escuchar
-	/*
-	if(listen(Socket, Maxclients) == -1){
-		fprintf(stderr, "Error preparando el servidor\n\r");
-		close(Socket);
+	
+	if(listen(miSocket, maxclients) == -1){
+		cout << "Error preparando el servidor\n\r";
+		close(miSocket);
 		return(1);
 	}
 	else{
-		fprintf("Servidor preparado correctamente\n\r");
+		cout << "Servidor preparado correctamente\n\r";
 	}
-	*/
-
+	
+    return 0;
 }
+
