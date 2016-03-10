@@ -14,7 +14,7 @@ void finalizar (int senyal)
 	close(s); /* cerrar para que accept termine con un error y salir del bucle principal */
 }
 
-void esperarConexiones() {
+void esperarConexiones(int maxClients, string documentRoot, string pagina, int s) {
 /**** Paso 4: Esperar conexiones ****/
 
 	unsigned int long_dir_cliente;
