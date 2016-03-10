@@ -7,18 +7,21 @@
 #include <unistd.h>
 #include <string.h>
 #include <signal.h>
-
+int s;
 void finalizar (int senyal)
 {
 	printf("Recibida la señal de fin (cntr-C)\n\r");
 	close(s); /* cerrar para que accept termine con un error y salir del bucle principal */
 }
 
-void esperarConexiones(int maxClients, string documentRoot, string pagina, int s) {
+int esperarConexiones(int maxClients, string documentRoot, string pagina, int socket) {
 /**** Paso 4: Esperar conexiones ****/
-
+	s=socket;
+	char *servidor_puerto;
 	unsigned int long_dir_cliente;
 	int s2;
+	struct sockaddr_in dir_cliente;
+	char mensaje[1024], respuesta[]="Gracias por tu mensaje";
 	int n, enviados, recibidos;
 	int proceso;
 	
