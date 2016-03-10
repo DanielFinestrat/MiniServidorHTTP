@@ -22,18 +22,20 @@ void leerDatos(string archivo, string* DocumentRoot, int* Maxclients, int* Puert
 
     char cadena1[128];
     char cadena2[16];
-    
-    ifstream fe(archivo.c_str());
-    fe.getline(cadena1, 128);
-    *DocumentRoot = cadena1;
-    fe.getline(cadena2, 16);
-    *Maxclients = CharToInt(cadena2);
-    fe.getline(cadena2, 16);
-    *Puerto = CharToInt(cadena2);
-    fe.getline(cadena1, 128);
-    *Pagina = cadena1;
-    
+    if(archivo!=""){
+        ifstream fe(archivo.c_str());
+        fe.getline(cadena1, 128);
+        *DocumentRoot = cadena1;
+        fe.getline(cadena2, 16);
+        *Maxclients = CharToInt(cadena2);
+        fe.getline(cadena2, 16);
+        *Puerto = CharToInt(cadena2);
+        fe.getline(cadena1, 128);
+        *Pagina = cadena1;
+    }
 }
+
+
 
 
 
