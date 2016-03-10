@@ -32,7 +32,7 @@ void leerDatos(string archivo, string* DocumentRoot, int* Maxclients, int* Puert
         *Puerto = CharToInt(cadena2);
         fe.getline(cadena1, 128);
         *Pagina = cadena1;
-    }
+    }else{ *DocumentRoot = "./documentos/"; *Maxclients = 5; *Pagina = "holamundo.html"; }
 }
 
 
