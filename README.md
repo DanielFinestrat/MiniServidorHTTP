@@ -1,4 +1,4 @@
-# MiniServidorHTTP ◙◙
+# MiniServidorHTTP
 
 Servidor HTTP básico desarrollado en C++
 
