@@ -12,11 +12,19 @@
 #include "cabecera.h"
 using namespace std;
 
+
+
 int miSocket; //Nuestro socket, variable global
+
+void finalizar (int senyal)
+{
+    printf("Recibida la señal de fin (cntr-C)\n\r");
+    close(miSocket); /* cerrar para que accept termine con un error y salir del bucle principal */
+}
 
 int main(int argc, char *argv[]){
 
-    char mensaje[1024], respuesta[] = "Gracias";
+    char mensaje[1024], respuesta[] = "<html><head><title>DirectoryIndex</title></head><body><p>Hola Mundo</p></body></html>";
     int n, enviados, recibidos, s2, proceso;
 	string documentRoot;    //Nos indica donde estan los archivos
 	string rutaConf = "";	//Nos indica donde esta el fichero de configuracion
