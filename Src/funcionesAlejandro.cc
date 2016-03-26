@@ -8,7 +8,7 @@
 #include <string.h>
 #include <signal.h>
 int s;
-void finalizar (int senyal)
+void finalizar1(int senyal)
 {
 	printf("Recibida la señal de fin (cntr-C)\n\r");
 	close(s); /* cerrar para que accept termine con un error y salir del bucle principal */
@@ -25,7 +25,7 @@ int esperarConexiones(int maxClients, string documentRoot, string pagina, int so
 	int n, enviados, recibidos;
 	int proceso;
 	
-	signal(SIGINT, finalizar);
+	signal(SIGINT, finalizar1);
 	
 	while (1)
 	{
