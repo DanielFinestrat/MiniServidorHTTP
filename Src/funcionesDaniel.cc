@@ -63,7 +63,7 @@ int inicializarSocket(){
 string parsearFichero(int codErr, string ruta){
 	string toRet = "";
 	string temp = "";
-	string modRuta = ruta + intToStr(codErr);
+	string modRuta = ruta + "Err" + intToStr(codErr) + ".html";
 
         ifstream fe(modRuta.c_str());
 	while(!fe.eof()){ getline(fe, temp); toRet += temp; }
