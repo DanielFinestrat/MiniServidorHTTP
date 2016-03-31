@@ -101,7 +101,7 @@ int main(int argc, char *argv[]){
 
 			//STRING A CHAR			
 			string miRespuesta = construirRespuestaError(500, documentRoot);
-			char respuesta[5120];
+			char respuesta[miRespuesta.size()+1];
 			strncpy(respuesta, miRespuesta.c_str(), sizeof(respuesta));
 			respuesta[sizeof(respuesta) - 1] = 0;
 			//STRING A CHAR
