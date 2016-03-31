@@ -1,8 +1,8 @@
 <HTML>
 <HEAD>
-<TITLE>DirectoryIndex</TITLE>
+<TITLE>Error 500</TITLE>
 </HEAD>
 <BODY>
-<P>Hola Mundo</P>
+<P>Error 500 - Internal Server Error</P>
 </BODY>
 </HTML>
