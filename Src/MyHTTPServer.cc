@@ -24,7 +24,8 @@ void finalizar (int senyal)
 
 int main(int argc, char *argv[]){
 
-    char mensaje[1024], respuesta[] = "HTTP1.X 200 OK\nConnection: keep-alive\nContent-Type: text/html; charset=UTF-8;\n\n<html><head><title>Index</title></head><body><h1>Mi titulo</h1><p>Mi <b>indice</b></p><ul><li style='color:red;'>Rojo</li><li style='color:blue;'>Azul</li><li style='color:green;'>Verde</li></body></html>";
+    char mensaje[1024];
+    char respuesta[] = "HTTP/1.0 200 OK\nConnection: keep-alive\nContent-Type: text/html; charset=UTF-8;\n\n<html><head><title>Index</title></head><body><h1>Mi titulo</h1><p>Mi <b>indice</b></p><ul><li style='color:red;'>Rojo</li><li style='color:blue;'>Azul</li><li style='color:green;'>Verde</li></body></html>";
     int n, enviados, recibidos, s2, proceso;
 	string documentRoot;    //Nos indica donde estan los archivos
 	string rutaConf = "";	//Nos indica donde esta el fichero de configuracion
@@ -98,7 +99,22 @@ int main(int argc, char *argv[]){
             
             //EMPEZAMOS A TRATAR EL MENSAJE QUE RECIBIMOS
             cout<<"Mensaje ["<<recibidos<<"] : "<< mensaje <<endl;
-            
+          
+	    int metodo; /* 0=Método Erroneo 1=GET 2=HEAD 3=PUT 4=DELETE */
+	    metodo = ver_metodo(mensaje);
+
+	
+	    if(metodo == 0){
+		//Error 405
+	    }
+	    else{
+	    string uri = ver_uri(mensaje);
+		
+	//No se comprueba si la uri es valida
+	    cout<< uri <<endl;
+
+	    }	
+	   
             
             /**** Paso 6: Enviar respuesta ****/
             
