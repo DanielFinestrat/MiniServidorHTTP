@@ -50,5 +50,11 @@ Servidor HTTP básico desarrollado en C++
 
   - ```git pull```
 
+6.- Si queremos descartar cambios sin subirlos:
+
+  - ```git reset --hard HEAD```
+  - ```git pull```
+
+
 ___
 2016
