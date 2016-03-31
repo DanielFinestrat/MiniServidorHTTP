@@ -24,7 +24,6 @@ void finalizar (int senyal){
 int main(int argc, char *argv[]){
 
     	char mensaje[1024];
-    	char respuesta[] = "";
     	int n, enviados, recibidos, s2, proceso;
 	string documentRoot;    //Nos indica donde estan los archivos
 	string rutaConf = "";	//Nos indica donde esta el fichero de configuracion
@@ -99,6 +98,14 @@ int main(int argc, char *argv[]){
 
             
             		/**** Paso 6: Enviar respuesta ****/
+
+			//STRING A CHAR			
+			string miRespuesta = construirRespuestaError(404, documentRoot);
+			char respuesta[1024];
+			strncpy(respuesta, miRespuesta.c_str(), sizeof(respuesta));
+			respuesta[sizeof(respuesta) - 1] = 0;
+			//STRING A CHAR
+
 			n = strlen(respuesta);
 			printf("Enviar respuesta [%d bytes]: %s\n\r", n, respuesta);
 			enviados = write(s2, respuesta, n);
