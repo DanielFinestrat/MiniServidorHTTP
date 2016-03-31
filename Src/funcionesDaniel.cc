@@ -1,10 +1,21 @@
+#include "cabecera.h"
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <string.h>
 #include <stdlib.h> 
 #include <sys/socket.h>
-#include "cabecera.h"
+#include <sstream>
 using namespace std;
+
+// Convierte int a string
+string intToStr(int n){
+	string toRet;
+	stringstream out;
+	out << n;
+	toRet = out.str();
+	return(toRet);
+}
 
 // Maneja los argumentos y saca del programa si la sintaxis es erronea
 int manageArguments(int argc, char *argv[], string &rutaConf, int &puerto){
@@ -46,4 +57,39 @@ int inicializarSocket(){
 
 	return nuevoSocket;
 
+}
+
+// Devuelve un STRING que contiene un fichero de error
+string parsearFichero(int codErr, string ruta){
+	string toRet = "";
+	string temp;
+	string modRuta = ruta + "/" + intToStr(codErr);
+
+        ifstream fe(modRuta.c_str());
+	while(getline(fe, temp)){ toRet += temp; }
+
+	return(toRet);
+}
+
+// Construye una respuesta a partir del codigo de error que se le pasa
+string construirRespuestaError(int codErr, string ruta){
+	string toRet = "HTTP/1.1";
+	string html = parsearFichero(codErr, ruta);
+
+	switch(codErr){
+		case 400: toRet += " 400 bad request"; break;
+		case 403: toRet += " 403 forbidden"; break;
+		case 404: toRet += " 404 not found"; break;
+		case 405: toRet += " 405 Method Not Allowed";	break;
+		case 503: toRet += " 503 Service Unavailable"; break;
+		case 505: toRet += " 505 HTTP version not Supported";	break;
+		default: toRet += " 500 Internal Server Error";
+	}
+
+	toRet += "\nConnection: close\nContent-Type: text/html\nServer: MiniHTTPServer/0.1\nContent-Lenght: ";
+	toRet += html.length();
+	toRet += "\n\n";
+	toRet += html;
+
+	return(toRet);
 }
