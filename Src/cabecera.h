@@ -8,3 +8,4 @@ void leerDatos(string archivo, string* DocumentRoot, int* Maxclients, int* Puert
 int ver_metodo(char mensaje[]);
 string ver_uri(char mensaje[]);
 string construirRespuestaError(int codErr, string ruta);
+int existeArchivo (string filename);
