@@ -93,10 +93,13 @@ int main(int argc, char *argv[]){
 
 	
 		    	if(metodo == 0){ /*Error 405*/ }
-		    	else{ string uri = ver_uri(mensaje); cout<< uri <<endl; } //No se comprueba si la uri es valida
-		
+		    	else{ 
+				string uri = ver_uri(mensaje);
+				int existe = existeArchivo(uri); /* 0= No existe 1=Existe  (Ahora mismo comprueba dentro de Src) */
+				cout<< uri <<" "<<existe<<endl; 
+			
+			}
 
-            
             		/**** Paso 6: Enviar respuesta ****/
 
 			//STRING A CHAR			
