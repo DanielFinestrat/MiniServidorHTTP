@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 
 
 int CharToInt(char cadena[16]){
@@ -79,14 +80,13 @@ int ver_metodo(char mensaje[]){
 }
 
 string ver_uri(char mensaje[]){
-	char caracteres[40];
-	int contador = 0, contador2 = 0;
+	string uri = "";
+	int contador = 0;
 	bool guardar = false;
 
 	for(int i=0; i<strlen(mensaje) && contador<2; i++){
-		if(guardar){
-			caracteres[contador2] = mensaje[i];
-			contador2++;		
+		if(guardar && mensaje[i]!='/' && mensaje[i]!=' '){
+			uri += mensaje[i];		
 		}
 		if(mensaje[i]==' ' && contador == 0){
 			contador++;
@@ -97,6 +97,19 @@ string ver_uri(char mensaje[]){
 		}
 	}
 
-	string uri = string(caracteres);
 	return uri;
+}
+
+int existeArchivo (string filename){
+	char* archivo = strdup(filename.c_str());
+
+	FILE* f = NULL;
+	f = fopen(archivo, "r");
+	if( f == NULL && errno == ENOENT){
+		return 0;
+	}
+	else{
+		fclose(f);
+		return 1;
+	}
 }
