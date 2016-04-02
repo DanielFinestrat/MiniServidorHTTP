@@ -6,7 +6,7 @@
 #include <string.h>
 #include <errno.h>
 
-
+//Metodo que lee una secuencia de carácteres para sacar el número total
 int CharToInt(char cadena[16]){
     int num = 0;
     int potencia = 0;
@@ -21,6 +21,7 @@ int CharToInt(char cadena[16]){
     return num;
 }
 
+//Metodo que se encarga de leer y guardar los valores del archivo de configuración del servidor
 void leerDatos(string archivo, string* DocumentRoot, int* Maxclients, int* Puerto, string* Pagina){
 
     char cadena1[128];
@@ -39,6 +40,7 @@ void leerDatos(string archivo, string* DocumentRoot, int* Maxclients, int* Puert
     }else{ *DocumentRoot = "./documentos/"; *Maxclients = 5; *Pagina = "index.html"; }
 }
 
+//Metodo que lee el método del mensaje HTTP recibido
 int ver_metodo(char mensaje[]){
 	int metodo;
 	if(mensaje[0]=='G' || mensaje[0]=='g'){
@@ -79,6 +81,7 @@ int ver_metodo(char mensaje[]){
 	return metodo;
 }
 
+//Metodo que devuelve el uri que se pide en la peticion HTTP
 string ver_uri(char mensaje[]){
 	string uri = "";
 	int contador = 0;
@@ -100,6 +103,7 @@ string ver_uri(char mensaje[]){
 	return uri;
 }
 
+//Metodo que comprueba si el archivo existe en la carpeta del servidor
 int existeArchivo (string filename){
 	char* archivo = strdup(filename.c_str());
 
@@ -112,4 +116,31 @@ int existeArchivo (string filename){
 		fclose(f);
 		return 1;
 	}
+}
+
+//Metodo que comprueba si la version HTTP es valida  
+bool versionHTTP_valida(char mensaje[]){
+	bool valida = false, leer = false;
+	int contador_espacios = 0;
+	for(int i=0; i<strlen(mensaje) && !leer ; i++){
+		if(mensaje[i]==' ' && !leer){
+			contador_espacios++;
+		}
+		if(contador_espacios == 2){
+			leer = true;
+			if(mensaje[i+1]=='H' && mensaje[i+2]=='T' && mensaje[i+3]=='T' && mensaje[i+4]=='P' && mensaje[i+5]=='/' &&  mensaje[i+7]=='.' && mensaje[i+9]==13){
+				if(mensaje[i+6]=='1'){
+					if(mensaje[i+8]=='0' || mensaje[i+8]=='1' || mensaje[i+8]=='2'){
+						valida = true;
+					}
+				}
+				else if(mensaje[i+6]=='2'){
+					if(mensaje[i+8]=='0'){
+						valida = true;
+					}
+				}	
+			}
+		}
+	}
+	return valida;
 }
