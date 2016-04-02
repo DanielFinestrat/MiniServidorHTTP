@@ -96,7 +96,8 @@ int main(int argc, char *argv[]){
 		    	else{ 
 				string uri = ver_uri(mensaje);
 				int existe = existeArchivo(uri); /* 0= No existe 1=Existe  (Ahora mismo comprueba dentro de Src) */
-				cout<< uri <<" "<<existe<<endl; 
+				bool valida = versionHTTP_valida(mensaje); /*Versiones validas (1.0 - 1.1 - 1.2 - 2.0) */
+				cout<< uri <<" "<<existe<<" "<<valida<<endl; 
 			
 			}
 
