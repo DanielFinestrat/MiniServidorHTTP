@@ -49,11 +49,11 @@ int manageArguments(int argc, char *argv[], string &rutaConf, int &puerto){
 // Crea el socket y lo devuelve, si hay error lo muestra
 int inicializarSocket(){
 
-	string err = "Error. No se puede abrir el socket\n\r";
+	string err = "SrvrMsg----> Error. No se puede abrir el socket\n\r";
 
 	int nuevoSocket = socket(AF_INET, SOCK_STREAM, 0);
 	if (nuevoSocket == -1) cout << err; 
-	else cout << "Socket creado sin errores\n\r";
+	else cout << "SrvrMsg----> Socket creado sin errores\n\r";
 
 	return nuevoSocket;
 
