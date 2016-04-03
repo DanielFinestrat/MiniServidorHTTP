@@ -21,10 +21,38 @@ void finalizar (int senyal){
     close(miSocket); //Cerrar para que accept termine con un error y salir del bucle principal
 }
 
+void enviarRespuesta(int socket, string respuesta){
+
+	int enviados = 0;
+	int longitud = 0;
+
+	//Si usasemos char array (No necesario)
+	/*char respuestaC[respuestaS.size()+1];
+	strncpy(respuestaC, respuestaS.c_str(), sizeof(respuestaC));
+	respuestaC[sizeof(respuestaC) - 1] = 0;
+	longitud = strlen(respuestaC);
+	printf("Enviar respuesta [%d bytes]: %s\n\r", longitud, respuestaC);
+	enviados = write(socket, respuestaC, longitud);*/
+
+	longitud = respuesta.length();
+	printf("Enviar respuesta [%d bytes]: %s\n\r", longitud, const_cast<char*>(respuesta.c_str()));
+	enviados = write(socket, const_cast<char*>(respuesta.c_str()), longitud);
+
+	if (enviados == -1 || enviados < longitud){
+		fprintf(stderr, "Error enviando la respuesta (%d)\n\r", enviados);
+		close(miSocket); close(socket); return;
+	}
+
+	printf("Respuesta enviada\n\r");        
+	close(socket); //Cierro el socket
+	exit(0); //El hijo ya no tiene que hacer nada
+
+}
+
 int main(int argc, char *argv[]){
 
     	char mensaje[1024];
-    	int n, enviados, recibidos, s2, proceso;
+    	int n, recibidos, s2, proceso;
 	string documentRoot;    //Nos indica donde estan los archivos
 	string rutaConf = "";	//Nos indica donde esta el fichero de configuracion
 	string pagina;          //Pagina que por defecto que se envia si no se indica otra
@@ -81,8 +109,14 @@ int main(int argc, char *argv[]){
             		/**** Paso 5: Leer el mensaje ****/
 		    	n = sizeof(mensaje);
 		   	recibidos = read(s2, mensaje, n);
-		    	if (recibidos == -1){ cout<< "Error leyendo el mensaje" <<endl; exit(1); }
-		    	mensaje[recibidos] = '\0'; // pongo el final de cadena
+		    	
+			if (recibidos == -1){ //No lee mensaje, error 500.
+				cout<< "Error leyendo el mensaje, enviando ERROR 500" <<endl;
+				string miRespuesta = construirRespuestaError(500, documentRoot);
+				enviarRespuesta(s2, miRespuesta);
+			}
+		    	
+			mensaje[recibidos] = '\0'; // pongo el final de cadena
             
             
 			//EMPEZAMOS A TRATAR EL MENSAJE QUE RECIBIMOS
@@ -92,7 +126,11 @@ int main(int argc, char *argv[]){
 		    	metodo = ver_metodo(mensaje);
 
 	
-		    	if(metodo == 0){ /*Error 405*/ }
+			if (metodo == 0){ //Metodo erroneo, error 405.
+				cout<< "Error de metodo erroneo, enviando ERROR 405" <<endl;
+				string miRespuesta = construirRespuestaError(405, documentRoot);
+				enviarRespuesta(s2, miRespuesta);
+			}
 		    	else{ 
 				string uri = ver_uri(mensaje);
 				int existe = existeArchivo(uri); /* 0= No existe 1=Existe  (Ahora mismo comprueba dentro de Src) */
@@ -101,26 +139,11 @@ int main(int argc, char *argv[]){
 			
 			}
 
-            		/**** Paso 6: Enviar respuesta ****/
-
-			//STRING A CHAR			
+            		/**** Paso 6: Enviar respuesta y borrar hijo ****/
+		
 			string miRespuesta = construirRespuestaError(500, documentRoot);
-			char respuesta[miRespuesta.size()+1];
-			strncpy(respuesta, miRespuesta.c_str(), sizeof(respuesta));
-			respuesta[sizeof(respuesta) - 1] = 0;
-			//STRING A CHAR
+			enviarRespuesta(s2, miRespuesta);
 
-			n = strlen(respuesta);
-			printf("Enviar respuesta [%d bytes]: %s\n\r", n, respuesta);
-			enviados = write(s2, respuesta, n);
-			if (enviados == -1 || enviados < n){
-				fprintf(stderr, "Error enviando la respuesta (%d)\n\r",enviados);
-				close(miSocket); return 1;
-			}
-            		printf("Respuesta enviada\n\r");
-            
-            		close(s2);
-           		exit(0); //El hijo ya no tiene que hacer nada
         }
         else{ close(s2); } //Soy el padre y no uso esta conexión
     }

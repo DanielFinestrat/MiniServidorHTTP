@@ -10,3 +10,4 @@ string ver_uri(char mensaje[]);
 string construirRespuestaError(int codErr, string ruta);
 int existeArchivo (string filename);
 bool versionHTTP_valida(char mensaje[]);
+string intToStr(int n);
