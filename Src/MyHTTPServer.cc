@@ -146,10 +146,9 @@ int main(int argc, char *argv[]){
 		
 			string miRespuesta = construirRespuestaError(500, documentRoot);
 			enviarRespuesta(s2, miRespuesta);
-
-        }
-        else{ close(s2); } //Soy el padre y no uso esta conexión
-    }
+		}else close(s2); //Soy el padre y no uso esta conexión
+	}
+	/**** Paso 7: Cerrar socket****/
 	close(miSocket);
 	cout<< "SrvrMsg----> Socket cerrado" <<endl;
 	return 0;
