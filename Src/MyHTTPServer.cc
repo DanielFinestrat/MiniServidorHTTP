@@ -92,43 +92,40 @@ int main(int argc, char *argv[]){
 	}else cout << "SrvrMsg----> Servidor preparado correctamente\n\r";
 
     	signal(SIGINT, finalizar);
-    
+
+	cout<< "SrvrMsg----> Esperando conexión en el puerto " << puerto <<endl;
     	while (1){
-        	cout<< "SrvrMsg----> Esperando conexión en el puerto " << puerto <<endl;
         	long_Cliente = sizeof (Cliente);
         	s2 = accept (miSocket, (struct sockaddr *)&Cliente, &long_Cliente);
         	
-		/* s2 es el socket para comunicarse con el cliente
-        	   s puede seguir siendo usado para comunicarse con otros clientes */
+		// s2 es el socket para comunicarse con el cliente, miSocket puede seguir siendo usado para comunicarse con otros clientes
 
-        	if (s2 == -1){ break; } //Salir del bucle
-       		proceso = fork(); //crear un nuevo proceso para que se pueda atender varias peticiones en paralelo
+        	if (s2 == -1){ break; } // Salir del bucle
+       		proceso = fork(); // Crear un nuevo proceso para que se pueda atender varias peticiones en paralelo
         	if (proceso == -1) exit(1);
-        	if (proceso == 0){ //Soy el hijo
-            		close(miSocket); //El hijo no necesita el socket general
+        	if (proceso == 0){ // Soy el hijo
+            		close(miSocket); // El hijo no necesita el socket general
             
             		/**** Paso 5: Leer el mensaje ****/
 		    	n = sizeof(mensaje);
 		   	recibidos = read(s2, mensaje, n);
-		    	
-			if (recibidos == -1){ //No lee mensaje, error 500.
+		    	cout<< "SrvrMsg----> Nuevo mensaje entrante" <<endl;
+			if (recibidos == -1){ // No lee mensaje, error 500.
 				cout<< "SrvrMsg----> Error leyendo el mensaje, enviando ERROR 500" <<endl;
 				string miRespuesta = construirRespuestaError(500, documentRoot);
 				enviarRespuesta(s2, miRespuesta);
 			}
 		    	
-			mensaje[recibidos] = '\0'; // pongo el final de cadena
-            
-            
-			//EMPEZAMOS A TRATAR EL MENSAJE QUE RECIBIMOS
+			mensaje[recibidos] = '\0'; // Pongo el final de cadena
+
 			cout<<"\n\r----------------------------\n\r";
 		    	cout<<"Mensaje recibido["<<recibidos<<"]: " <<endl << mensaje;
 			cout<<"\n\r----------------------------\n\r\n\r";
-		  
-		    	int metodo; /* 0=Método Erroneo 1=GET 2=HEAD 3=PUT 4=DELETE */
+
+			/**** Paso 5.1: Tratamos la peticion ****/
+		    	int metodo; // 0=Método Erroneo 1=GET 2=HEAD 3=PUT 4=DELETE
 		    	metodo = ver_metodo(mensaje);
 
-	
 			if (metodo == 0){ //Metodo erroneo, error 405.
 				cout<< "SrvrMsg----> Error de metodo erroneo, enviando ERROR 405" <<endl;
 				string miRespuesta = construirRespuestaError(405, documentRoot);
@@ -143,11 +140,12 @@ int main(int argc, char *argv[]){
 			}
 
             		/**** Paso 6: Enviar respuesta y borrar hijo ****/
-		
 			string miRespuesta = construirRespuestaError(500, documentRoot);
 			enviarRespuesta(s2, miRespuesta);
+
 		}else close(s2); //Soy el padre y no uso esta conexión
 	}
+
 	/**** Paso 7: Cerrar socket****/
 	close(miSocket);
 	cout<< "SrvrMsg----> Socket cerrado" <<endl;
