@@ -123,20 +123,28 @@ int main(int argc, char *argv[]){
 			cout<<"\n\r----------------------------\n\r\n\r";
 
 			/**** Paso 5.1: Tratamos la peticion ****/
+
+			//1.- Metodo valido. Metodos validos (GET - HEAD - PUT - DELETE)
 		    	int metodo; // 0=Método Erroneo 1=GET 2=HEAD 3=PUT 4=DELETE
 		    	metodo = ver_metodo(mensaje);
-
 			if (metodo == 0){ //Metodo erroneo, error 405.
 				cout<< "SrvrMsg----> Error de metodo erroneo, enviando ERROR 405" <<endl;
 				string miRespuesta = construirRespuestaError(405, documentRoot);
 				enviarRespuesta(s2, miRespuesta);
 			}
-		    	else{ 
-				string uri = ver_uri(mensaje);
-				int existe = existeArchivo(uri); /* 0= No existe 1=Existe  (Ahora mismo comprueba dentro de Src) */
-				bool valida = versionHTTP_valida(mensaje); /*Versiones validas (1.0 - 1.1 - 1.2 - 2.0) */
-				cout<< "SrvrMsg----> Uri: " << uri <<" Existe: "<<existe<<" Validada: "<<valida<<endl; 
-			
+
+			//2.- URI valida.
+			string uri = ver_uri(mensaje);
+			int existe = existeArchivo(uri); /* 0= No existe 1=Existe  (Ahora mismo comprueba dentro de Src) */
+			cout<< "SrvrMsg----> Uri: " << uri <<" Existe: "<<existe<<endl;
+
+			//3.- Version compatible. Versiones validas (1.0 - 1.1 - 1.2 - 2.0)
+			bool valida = versionHTTP_valida(mensaje);
+			cout<< "SrvrMsg----> Version validada (0/1): "<<valida<<endl; 
+			if(!valida){ //Version no valida, error 505.
+				cout<< "SrvrMsg----> Error de version no valida, enviando ERROR 505" <<endl;
+				string miRespuesta = construirRespuestaError(505, documentRoot);
+				enviarRespuesta(s2, miRespuesta);
 			}
 
             		/**** Paso 6: Enviar respuesta y borrar hijo ****/
