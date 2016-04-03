@@ -89,7 +89,7 @@ string construirRespuestaError(int codErr, string ruta){
 		default: toRet += " 500 Internal Server Error";
 	}
 
-	toRet += "\nConnection: close\nContent-Type: text/html\nServer: MiniServidorHTTP/0.1\nContent-Lenght: ";
+	toRet += "\nConnection: close\nContent-Type: text/html\nServer: MyHTTPServer/0.1\nContent-Lenght: ";
 	toRet += intToStr(html.length());
 	toRet += "\n\n";
 	toRet += html;
