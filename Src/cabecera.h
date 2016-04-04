@@ -11,3 +11,5 @@ string construirRespuestaError(int codErr, string ruta);
 int existeArchivo (string filename, string directorio);
 bool versionHTTP_valida(char mensaje[]);
 string intToStr(int n);
+void leerCabeceras(char mensaje[], string* accept1, string* accept2, string* charset, string* user_agent, string* host, bool* error);
+void guardarCabeceras(string cabecera, string* accept1, string* accept2, string* charset, string* user_agent, string* host, bool* error);

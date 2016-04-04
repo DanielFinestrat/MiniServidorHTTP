@@ -158,3 +158,95 @@ bool versionHTTP_valida(char mensaje[]){
 	}
 	return valida;
 }
+
+//Metodo que separa los accept
+void leerAccept(string accept, string* accept1, string* accept2){
+	char frase[accept.size()+1];
+	strcpy(frase, accept.c_str());
+	bool uno = false, dos = false;
+
+	for(int i=0; i<strlen(frase); i++){
+		if(!uno && (frase[i]==',' || frase[i]==';')){
+			uno = true;
+		}
+		else if(uno && !dos && (frase[i]==',' || frase[i]==';')){
+			dos = true;
+		}
+		else if(!uno){
+			*accept1 += frase[i];		
+		}
+		else if(uno && !dos){
+			*accept2 += frase[i];
+		}
+	}
+}
+
+//Metodo que guarda las cabeceras
+void guardarCabeceras(string cabecera, string* accept1, string* accept2, string* charset, string* user_agent, string* host, bool* error){
+
+	string accept = "";
+	char frase[cabecera.size()+1];
+	strcpy(frase, cabecera.c_str());
+	int contador = 0, num_cabecera = -1; /* -1 = NO LA ENTIENDE EL SERVIDOR / 0 = ACCEPT / 1 = ACCEPT-CHARSET / 2 = USER-AGENT / 3 = HOST */
+
+	if(frase[0]=='H' && frase[1]=='o' && frase[2]=='s' && frase[3]=='t' && frase[4]==':'){
+		contador = 6;
+		num_cabecera = 3;
+	}
+	else if(frase[0]=='U' && frase[1]=='s' && frase[2]=='e' && frase[3]=='r' && frase[4]=='-' && frase[5]=='A' && frase[6]=='g' && frase[7]=='e' && frase[8]=='n' && frase[9]=='t' && frase[10]==':'){
+		contador = 12;
+		num_cabecera = 2;
+	}
+	else if(frase[0]=='A' && frase[1]=='c' && frase[2]=='c' && frase[3]=='e' && frase[4]=='p' && frase[5]=='t' && frase[6]==':'){
+		contador = 8;
+		num_cabecera = 0;
+	}
+	else if(frase[0]=='A' && frase[1]=='c' && frase[2]=='c' && frase[3]=='e' && frase[4]=='p' && frase[5]=='t' && frase[6]=='-' && frase[7]=='C' && frase[8]=='h' && frase[9]=='a' && frase[10]=='r' && frase[11]=='s' && frase[12]=='e' && frase[13]=='t' && frase[14]==':'){
+		contador = 16;
+		num_cabecera = 1;
+	}
+
+	for(int i=contador; i<strlen(frase); i++){
+		if(num_cabecera == 3){
+			*host += frase[i];
+		}
+		else if(num_cabecera == 2){
+			*user_agent += frase[i];
+		}
+		else if(num_cabecera == 1){
+			*charset += frase[i];
+		}
+		else if(num_cabecera == 0){
+			accept += frase[i];
+		}
+	}
+
+	if(num_cabecera == 0){
+		leerAccept(accept, accept1, accept2);
+	}
+}
+
+//Metodo que lee las cabeceras del mensaje
+void leerCabeceras(char mensaje[], string* accept1, string* accept2, string* charset, string* user_agent, string* host, bool* error){
+	string cabecera = "";
+	int contador = 0;
+	bool fin = false, leer = false;
+	for(int i=0; i<strlen(mensaje) && !false; i++){
+		if(leer && mensaje[i]!=13 && mensaje[i]!=10){
+			cabecera += mensaje[i];
+		}
+		if((mensaje[i]==13 || mensaje[i]==10) && mensaje[i+1]!=13 && mensaje[i+1]!=10){
+			if(!leer){
+				leer = true;
+			}
+			else{
+				guardarCabeceras(cabecera, accept1, accept2, charset, user_agent, host, error);
+				cabecera = "";
+			}
+		}
+		if((mensaje[i]==13 || mensaje[i]==10) && (mensaje[i+1]==13 || mensaje[i+1]==10)){
+			fin = true;
+		}
+	}
+}
+

@@ -152,6 +152,17 @@ int main(int argc, char *argv[]){
 				enviarRespuesta(s2, miRespuesta);
 			}
 
+			//4.- Cabeceras
+			string accept1 = "", accept2 = "", charset = "", user_agent = "", host="";
+			bool error = false;  //Si hay alguna cabecera que no entendemos cambia a true
+			leerCabeceras(mensaje, &accept1, &accept2, &charset, &user_agent, &host, &error);
+			cout<<endl<<endl;
+			cout<< "SrvrMsg----> Accept (tipo1): "<<accept1<<endl;
+			cout<< "SrvrMsg----> Accept (tipo2): "<<accept2<<endl;
+			cout<< "SrvrMsg----> Accept-Charset: "<<charset<<endl;
+			cout<< "SrvrMsg----> User-Agent: "<<user_agent<<endl;
+			cout<< "SrvrMsg----> Host: "<<host<<endl;
+
             		/**** Paso 6: Enviar respuesta y borrar hijo ****/
 			string miRespuesta = construirRespuestaError(500, documentRoot);
 			enviarRespuesta(s2, miRespuesta);
