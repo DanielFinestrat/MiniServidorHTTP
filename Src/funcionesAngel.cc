@@ -114,9 +114,7 @@ string ver_uri(char mensaje[]){
 //Metodo que comprueba si el archivo existe en la carpeta del servidor
 int existeArchivo (string filename, string directorio){
 	
-	//Modificado por Dani: si nos piden "/" quieren la pagina por defecto
-	//ademas, busca el fichero en el documentRoot
-	if (filename == "") filename = "index.html"; //Si nos piden "/", les damos el index
+	//Modificado por Dani: busca el fichero en el documentRoot
 	filename = directorio + filename; //Indicamos el documentRoot antes de la uri nueva
 	cout<<"SrvrMsg----> La ruta del fichero es: " <<filename <<endl;
 
