@@ -75,7 +75,7 @@ string parsearFichero(int codErr, string ruta){
 }
 
 // Construye una respuesta a partir del codigo de error que se le pasa
-string construirRespuestaError(int codErr, string ruta/*, string charset*/){
+string construirRespuestaError(int codErr, string ruta, string charset){
 	string toRet = "HTTP/1.1";
 	string html = parsearFichero(codErr, ruta);
 
@@ -89,12 +89,12 @@ string construirRespuestaError(int codErr, string ruta/*, string charset*/){
 		default: toRet += " 500 Internal Server Error";
 	}
 
-	toRet += "\nConnection: close\nContent-Type: text/html\nServer: MyHTTPServer/0.1\nContent-Lenght: ";
+	//toRet += "\nConnection: close\nContent-Type: text/html\nServer: MyHTTPServer/0.1\nContent-Lenght: ";
 	
-	/*toRet += "\nConnection: close";
-	toRet += "\nContent-Type: text/html; "; if(charset == "") toRet += "charset=utf-8" else toRet += charset;
+	toRet += "\nConnection: close";
+	toRet += "\nContent-Type: text/html; "; if(charset == "") toRet += "charset=utf-8"; else toRet += charset;
 	toRet += "\nServer: MyHTTPServer/0.1";
-	toRet += "\nContent-Lenght: ";*/
+	toRet += "\nContent-Lenght: ";
 	
 	toRet += intToStr(html.length());
 	toRet += "\n\n";

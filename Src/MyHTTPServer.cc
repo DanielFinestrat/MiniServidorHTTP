@@ -112,7 +112,7 @@ int main(int argc, char *argv[]){
 		    	cout<< "SrvrMsg----> Nuevo mensaje entrante" <<endl;
 			if (recibidos == -1){ // No lee mensaje, error 500.
 				cout<< "SrvrMsg----> Error leyendo el mensaje, enviando ERROR 500" <<endl;
-				string miRespuesta = construirRespuestaError(500, documentRoot);
+				string miRespuesta = construirRespuestaError(500, documentRoot, "");
 				enviarRespuesta(s2, miRespuesta);
 			}
 		    	
@@ -129,7 +129,7 @@ int main(int argc, char *argv[]){
 		    	metodo = ver_metodo(mensaje);
 			if (metodo == 0){ //Metodo erroneo, error 405.
 				cout<< "SrvrMsg----> Error de metodo erroneo, enviando ERROR 405" <<endl;
-				string miRespuesta = construirRespuestaError(405, documentRoot);
+				string miRespuesta = construirRespuestaError(405, documentRoot, "");
 				enviarRespuesta(s2, miRespuesta);
 			}
 
@@ -139,7 +139,7 @@ int main(int argc, char *argv[]){
 			cout<< "SrvrMsg----> Uri: " << uri <<" Existe: "<<existe<<endl;
 			if(!existe && metodo != 3){ //Doc pedido no existe y no estamos usando PUT, error 404.
 				cout<< "SrvrMsg----> Error de fichero no encontrado, enviando ERROR 404" <<endl;
-				string miRespuesta = construirRespuestaError(404, documentRoot);
+				string miRespuesta = construirRespuestaError(404, documentRoot, "");
 				enviarRespuesta(s2, miRespuesta);
 			}
 
@@ -148,7 +148,7 @@ int main(int argc, char *argv[]){
 			cout<< "SrvrMsg----> Version validada (0/1): "<<valida<<endl; 
 			if(!valida){ //Version no valida, error 505.
 				cout<< "SrvrMsg----> Error de version no valida, enviando ERROR 505" <<endl;
-				string miRespuesta = construirRespuestaError(505, documentRoot);
+				string miRespuesta = construirRespuestaError(505, documentRoot, "");
 				enviarRespuesta(s2, miRespuesta);
 			}
 
@@ -166,7 +166,7 @@ int main(int argc, char *argv[]){
 			// tratar peticiones
 			string miRespuesta = tratarPeticion(documentRoot,metodo,uri);
 
-            /*** Paso 6: Enviar respuesta y borrar hijo ****/
+            		/*** Paso 6: Enviar respuesta y borrar hijo ****/
 			//string miRespuesta = construirRespuestaError(500, documentRoot);
 			enviarRespuesta(s2, miRespuesta);
 
