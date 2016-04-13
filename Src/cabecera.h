@@ -10,7 +10,7 @@ string ver_uri(char mensaje[]);
 int existeArchivo (string filename, string directorio);
 bool versionHTTP_valida(char mensaje[]);
 string intToStr(int n);
-void leerCabeceras(char mensaje[], string* accept1, string* accept2, string* charset, string* user_agent, string* host, bool* error);
+void leerCabeceras(char mensaje[], string* accept1, string* accept2, string* charset, string* user_agent, string* host, string* cuerpo, bool* error);
 void guardarCabeceras(string cabecera, string* accept1, string* accept2, string* charset, string* user_agent, string* host, bool* error);
 void leerAccept(string accept, string* accept1, string* accept2);
 string parsearFicheroGET(string ruta);
