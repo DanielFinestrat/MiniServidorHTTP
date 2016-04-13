@@ -14,3 +14,5 @@ string intToStr(int n);
 void leerCabeceras(char mensaje[], string* accept1, string* accept2, string* charset, string* user_agent, string* host, bool* error);
 void guardarCabeceras(string cabecera, string* accept1, string* accept2, string* charset, string* user_agent, string* host, bool* error);
 void leerAccept(string accept, string* accept1, string* accept2);
+string parsearFicheroGET(string ruta);
+string tratarPeticion(string root,int metodo,string uri);
