@@ -13,6 +13,27 @@
 #include <string.h>
 #include <sstream>
 
+// comprueba que la ruta no sea PROOOHIIBIIIIDAAA
+bool checkNombres(string ruta) {
+	if (ruta != "boo2.gif" &&
+	ruta != "Boo.html" &&
+	ruta != "Captura.PNG" &&
+	ruta != "DeleteCompleto.html" &&
+	ruta != "Err400.html" &&
+	ruta != "Err403.html" &&
+	ruta != "Err404.html" &&
+	ruta != "Err405.html" &&
+	ruta != "Err500.html" &&
+	ruta != "Err503.html" &&
+	ruta != "Err505.html" &&
+	ruta != "favicon.ico" &&
+	ruta != "index.html" &&
+	ruta != "PutCompleto.html")
+		return true;
+	else
+		return false;
+}
+
 // recibe el metodo y la uri para responder acordemente
 string tratarPeticion(string root,int metodo,string uri) {
 	string doc = "HTTP/1.1 200 OK\nConnection: close\nContent-Type: text/html\nServer: MyHTTPServer/0.1\nContent-Lenght: ";
@@ -31,11 +52,12 @@ string tratarPeticion(string root,int metodo,string uri) {
 		{
 			if (checkNombres(uri))
 			{
-				ofstream fs(root+"/publicdocs/"+uri);
+				string rutCompuesta = root+"/publicdocs/"+uri;
+				ofstream fs(const_cast<char*>(rutCompuesta.c_str()));
 				fs.close();
 				fich = parsearFicheroGET(root+"PutCompleto.html");
 			} else {
-				doc = construirRespuestaError(403,root);
+				doc = construirRespuestaError(403,root,"");
 				return doc;
 			}
 			break;
@@ -43,14 +65,15 @@ string tratarPeticion(string root,int metodo,string uri) {
 		case 4: // delete
 		{
 			if (checkNombres(uri)) {
-				if (remove(root+uri)!=0) {
-					doc = construirRespuestaError(500, root);
+				string aux = root+uri;
+				if (remove(const_cast<char*>(aux.c_str()))!=0) {
+					doc = construirRespuestaError(500, root,"");
 					return doc;
 				} else {
 					fich = parsearFicheroGET(root+"DeleteCompleto.html");
 				}
 			} else {
-				doc = construirRespuestaError(403,root);
+				doc = construirRespuestaError(403,root,"");
 				return doc;
 			}
 			break;
@@ -77,25 +100,4 @@ string parsearFicheroGET(string ruta) {
 	fe.close();
 
 	return(toRet);
-}
-
-// comprueba que la ruta no sea PROOOHIIBIIIIDAAA
-bool checkNombres(sring ruta) {
-	if (ruta != "boo2.gif" &&
-	ruta != "Boo.html" &&
-	ruta != "Captura.PNG" &&
-	ruta != "DeleteCompleto.html" &&
-	ruta != "Err400.html" &&
-	ruta != "Err403.html" &&
-	ruta != "Err404.html" &&
-	ruta != "Err405.html" &&
-	ruta != "Err500.html" &&
-	ruta != "Err503.html" &&
-	ruta != "Err505.html" &&
-	ruta != "favicon.ico" &&
-	ruta != "index.html" &&
-	ruta != "PutCompleto.html")
-		return true;
-	else
-		return false;
 }
