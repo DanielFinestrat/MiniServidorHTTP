@@ -163,10 +163,8 @@ int main(int argc, char *argv[]){
 			cout<< "SrvrMsg----> User-Agent: "<<user_agent<<endl;
 			cout<< "SrvrMsg----> Host: "<<host<<endl;
 			
-			// tratar peticiones
-			string miRespuesta = tratarPeticion(documentRoot,metodo,uri);
-
-            		/*** Paso 6: Enviar respuesta y borrar hijo ****/
+			/*** Paso 6: Enviar respuesta y borrar hijo ****/
+			string miRespuesta = tratarPeticion(documentRoot,metodo,uri, accept1, charset);
 			//string miRespuesta = construirRespuestaError(500, documentRoot);
 			enviarRespuesta(s2, miRespuesta);
 

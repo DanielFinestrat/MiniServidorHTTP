@@ -92,7 +92,7 @@ string construirRespuestaError(int codErr, string ruta, string charset){
 	//toRet += "\nConnection: close\nContent-Type: text/html\nServer: MyHTTPServer/0.1\nContent-Lenght: ";
 	
 	toRet += "\nConnection: close";
-	toRet += "\nContent-Type: text/html; "; if(charset == "") toRet += "charset=utf-8"; else toRet += charset;
+	toRet += "\nContent-Type: text/html; charset="; if(charset == "") toRet += "utf-8"; else toRet += charset;
 	toRet += "\nServer: MyHTTPServer/0.1";
 	toRet += "\nContent-Lenght: ";
 	

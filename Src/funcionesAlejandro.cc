@@ -35,9 +35,8 @@ bool checkNombres(string ruta) {
 }
 
 // recibe el metodo y la uri para responder acordemente
-string tratarPeticion(string root,int metodo,string uri) {
-	string doc = "HTTP/1.1 200 OK\nConnection: close\nContent-Type: text/html\nServer: MyHTTPServer/0.1\nContent-Lenght: ";
-	string fich = ""; string len = "";
+string tratarPeticion(string root,int metodo,string uri,string contentType, string charset) {
+	string fich = ""; string len = ""; string doc = "";
 	switch (metodo) {
 		case 1: { // get
 			fich = parsearFicheroGET(root + uri);
@@ -81,6 +80,13 @@ string tratarPeticion(string root,int metodo,string uri) {
 		}
 	}
 	
+	doc = "HTTP/1.1 ";
+	if(metodo != 3) doc += "200 OK"; else doc += "201 Created";
+	doc += "\nConnection: close\nContent-Type: ";
+	if(contentType == "") doc += "text/html"; else doc += contentType;
+	doc += "; charset=";
+	if(charset == "") doc += "utf-8"; else doc += charset;
+	doc += "\nServer: MyHTTPServer/0.1\nContent-Lenght: ";
 	len = intToStr(fich.length());
 	doc+=len;
 	doc+="\n\n";	
