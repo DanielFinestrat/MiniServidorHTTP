@@ -162,9 +162,12 @@ int main(int argc, char *argv[]){
 			cout<< "SrvrMsg----> Accept-Charset: "<<charset<<endl;
 			cout<< "SrvrMsg----> User-Agent: "<<user_agent<<endl;
 			cout<< "SrvrMsg----> Host: "<<host<<endl;
+			
+			// tratar peticiones
+			string miRespuesta = tratarPeticion(documentRoot,metodo,uri);
 
-            		/**** Paso 6: Enviar respuesta y borrar hijo ****/
-			string miRespuesta = construirRespuestaError(500, documentRoot);
+            /*** Paso 6: Enviar respuesta y borrar hijo ****/
+			//string miRespuesta = construirRespuestaError(500, documentRoot);
 			enviarRespuesta(s2, miRespuesta);
 
 		}else close(s2); //Soy el padre y no uso esta conexión
