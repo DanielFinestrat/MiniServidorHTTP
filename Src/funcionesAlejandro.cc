@@ -52,7 +52,8 @@ string tratarPeticion(string root,int metodo,string uri) {
 		{
 			if (checkNombres(uri))
 			{
-				string rutCompuesta = root+"/publicdocs/"+uri;
+				//string rutCompuesta = root+"/publicdocs/"+uri;
+				string rutCompuesta = root+uri;
 				ofstream fs(const_cast<char*>(rutCompuesta.c_str()));
 				fs.close();
 				fich = parsearFicheroGET(root+"PutCompleto.html");
