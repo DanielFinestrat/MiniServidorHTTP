@@ -107,7 +107,8 @@ string ver_uri(char mensaje[]){
 			contador++;
 		}
 	}
-
+	if (uri=="")
+		uri="index.html";
 	return uri;
 }
 
