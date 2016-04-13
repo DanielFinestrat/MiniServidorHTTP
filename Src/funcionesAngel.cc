@@ -140,7 +140,7 @@ bool versionHTTP_valida(char mensaje[]){
 		}
 		if(contador_espacios == 2){
 			leer = true;
-			if(mensaje[i+1]=='H' && mensaje[i+2]=='T' && mensaje[i+3]=='T' && mensaje[i+4]=='P' && mensaje[i+5]=='/' &&  mensaje[i+7]=='.' && mensaje[i+9]==13){
+			if((mensaje[i+1]=='H' || mensaje[i+1]=='h') && (mensaje[i+2]=='T' || mensaje[i+2]=='t') && (mensaje[i+3]=='T' || mensaje[i+3]=='t') && (mensaje[i+4]=='P' || mensaje[i+4]=='p') && mensaje[i+5]=='/' &&  mensaje[i+7]=='.' && mensaje[i+9]==13){
 				if(mensaje[i+6]=='1'){
 					if(mensaje[i+8]=='0' || mensaje[i+8]=='1' || mensaje[i+8]=='2'){
 						valida = true;

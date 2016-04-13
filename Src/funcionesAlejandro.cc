@@ -55,7 +55,7 @@ string tratarPeticion(string root,int metodo,string uri) {
 				string rutCompuesta = root+uri;
 				ofstream fs(const_cast<char*>(rutCompuesta.c_str()));
 				fs.close();
-				if (existeArchivo (uri,root) == 0) doc = construirRespuestaError(500,root,"");
+				if (existeArchivo (uri,root) == 0){ doc = construirRespuestaError(500,root,""); return doc;}
 				fich = parsearFicheroGET(root+"PutCompleto.html");
 			} else {
 				doc = construirRespuestaError(403,root,"");
