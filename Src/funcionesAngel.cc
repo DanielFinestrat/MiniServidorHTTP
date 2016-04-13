@@ -203,6 +203,9 @@ void guardarCabeceras(string cabecera, string* accept1, string* accept2, string*
 		contador = 16;
 		num_cabecera = 1;
 	}
+	else{
+		*error = true;	
+	}
 
 	for(int i=contador; i<strlen(frase); i++){
 		if(num_cabecera == 3){
@@ -225,26 +228,39 @@ void guardarCabeceras(string cabecera, string* accept1, string* accept2, string*
 }
 
 //Metodo que lee las cabeceras del mensaje
-void leerCabeceras(char mensaje[], string* accept1, string* accept2, string* charset, string* user_agent, string* host, bool* error){
+void leerCabeceras(char mensaje[], string* accept1, string* accept2, string* charset, string* user_agent, string* host, string* cuerpo, bool* error){
 	string cabecera = "";
 	int contador = 0;
 	bool fin = false, leer = false;
-	for(int i=0; i<strlen(mensaje) && !false; i++){
-		if(leer && mensaje[i]!=13 && mensaje[i]!=10){
-			cabecera += mensaje[i];
-		}
-		if((mensaje[i]==13 || mensaje[i]==10) && mensaje[i+1]!=13 && mensaje[i+1]!=10){
-			if(!leer){
-				leer = true;
-			}
-			else{
-				guardarCabeceras(cabecera, accept1, accept2, charset, user_agent, host, error);
-				cabecera = "";
+	for(int i=0; i<strlen(mensaje); i++){
+		//Lee el cuerpo
+		if(fin){
+			if(mensaje[i]!=13 && mensaje[i]!=10){
+				*cuerpo+=mensaje[i];
 			}
 		}
-		if((mensaje[i]==13 || mensaje[i]==10) && (mensaje[i+1]==13 || mensaje[i+1]==10)){
-			fin = true;
-		}
+		//Le primera linea y cabeceras
+		else{
+			//Lee las cabeceras
+			if(leer && mensaje[i]!=13 && mensaje[i]!=10){
+				cabecera += mensaje[i];
+			}
+			//Final de linea
+			if((mensaje[i]==13 || mensaje[i]==10) && mensaje[i+1]!=13 && mensaje[i+1]!=10){
+				//Booleano que pasa a true cuando llega al final de la primera linea
+				if(!leer){
+					leer = true;
+				}
+				//Cuando llega al final de las lineas envia todo el contenido a otro metodo que se encarga de guardarlas
+				else{
+					guardarCabeceras(cabecera, accept1, accept2, charset, user_agent, host, error);
+					cabecera = "";
+				}
+			}
+			//Doble salto de linea, donde empieza el cuerpo
+			if((mensaje[i]==13 || mensaje[i]==10) && (mensaje[i+1]==13 || mensaje[i+1]==10) && ((mensaje[i+2]==13 || mensaje[i+2]==10))){
+				fin = true;
+			}
+		}	
 	}
 }
-
