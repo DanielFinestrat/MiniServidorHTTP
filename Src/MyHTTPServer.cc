@@ -137,6 +137,13 @@ int main(int argc, char *argv[]){
 
 				/**** Paso 5.1: Tratamos la peticion ****/
 
+				//Comprobamos que no sea una peticion vacia
+				if (recibidos <= 0){ // Peticion vacia, 400.
+					cout<< "SrvrMsg----> Peticion erronea, enviando ERROR 400" <<endl;
+					string miRespuesta = construirRespuestaError(400, documentRoot, "");
+					enviarRespuesta(s2, miRespuesta, true);
+				}
+
 				//1.- Metodo compatible. Metodos validosGET - HEAD - PUT - DELETE)
 			    	int metodo; // 0=Método Erroneo 1=GET 2=HEAD 3=PUT 4=DELETE
 			    	metodo = ver_metodo(mensaje);
