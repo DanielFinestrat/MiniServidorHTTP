@@ -84,7 +84,7 @@ string tratarPeticion(string root,int metodo,string uri,string contentType, stri
 	doc = "HTTP/1.1 ";
 	if(metodo != 3) doc += "200 OK"; else doc += "201 Created";
 	doc += "\nConnection: close\nContent-Type: ";
-	if(contentType == "") doc += "text/html"; else doc += contentType;
+	if(contentType == "" || contentType == "*/*" ) doc += "text/html"; else doc += contentType;
 	doc += "; charset=";
 	if(charset == "") doc += "utf-8"; else doc += charset;
 	doc += "\nServer: MyHTTPServer/0.1\nContent-Lenght: ";
