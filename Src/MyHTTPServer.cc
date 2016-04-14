@@ -38,7 +38,7 @@ void enviarRespuesta(int socket, string respuesta, bool aumentarClientes){
 		close(miSocket); close(socket); return;
 	}
 
-	printf("SrvrMsg----> Respuesta enviada correctamente\n\r");        
+	printf("SrvrMsg----> Respuesta enviada correctamente\n\r");
 	close(socket); //Cierro el socket
 	if(aumentarClientes){
 		*contHijos = *contHijos + 1; //Aumentamos el contador de hijos disponibles
@@ -66,7 +66,7 @@ int main(int argc, char *argv[]){
 	//Prueba de que funciona
 	cout<< "SrvrMsg----> Datos configuracion -- DocRot: " << documentRoot <<" MaxClients: "<<maxclients<<" Puerto: "<<puerto<<" Pagina: "<<pagina<<" IP: "<<ip<<endl;
 
-	contHijos = (int*)mmap(NULL, sizeof *contHijos, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);	
+	contHijos = (int*)mmap(NULL, sizeof *contHijos, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANON, -1, 0);	
 	*contHijos = maxclients; //Inicializamos el contador de hijos disponibles al maximo
 	cout << "SrvrMsg----> Clientes disponibles: " <<*contHijos <<endl;
 
