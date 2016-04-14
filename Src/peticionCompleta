@@ -1,0 +1,10 @@
+head / HTTP/1.1
+Host: 127.0.0.1:8081
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:45.0) Gecko/20100101 Firefox/45.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Charset: ISO-8859-8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+<!DOCTYPE HTML><html><head><meta charset="utf-8"><title>Index</title><style>@import url(http://fonts.googleapis.com/css?family=Bree+Serif|Source+Sans+Pro:300,400);*{	maring: 0;	padding: 0;}body{	font-family: 'Source Sans Pro', sans-serif;	background: #3f6eb3;	color: #1f3759;}.bree-font{	font-family: 'Bree Serif', serif;}#content{	margin: 0 auto;	width: 960px;}#main-body{	text-align: center;}.enormous-font{	font-size: 10em;	margin-bottom: 0em;}.big-font{	font-size: 2em;}</style></head><body>    <div id="content">        <div id="main-body">            <p class="enormous-font bree-font">Index</p>            <p class="big-font">Hola mundo. ¿Qué tal?</p>        </div>    </div></body></html>

@@ -107,6 +107,7 @@ string ver_uri(char mensaje[], string* Pagina){
 			contador++;
 		}
 	}
+
 	if (uri=="") uri = *Pagina;
 	return uri;
 }
