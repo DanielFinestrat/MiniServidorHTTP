@@ -22,7 +22,7 @@ int CharToInt(char cadena[16]){
 }
 
 //Metodo que se encarga de leer y guardar los valores del archivo de configuración del servidor
-void leerDatos(string archivo, string* DocumentRoot, int* Maxclients, int* Puerto, string* Pagina){
+void leerDatos(string archivo, string* DocumentRoot, int* Maxclients, int* Puerto, string* Pagina, string* ip){
 
     char cadena1[128];
     char cadena2[16];
@@ -36,8 +36,10 @@ void leerDatos(string archivo, string* DocumentRoot, int* Maxclients, int* Puert
         *Puerto = CharToInt(cadena2);
         fe.getline(cadena1, 128);
         *Pagina = cadena1;
+        fe.getline(cadena1, 128);
+        *ip = cadena1;
 	fe.close();
-    }else{ *DocumentRoot = "./documentos/"; *Maxclients = 5; *Pagina = "index.html"; }
+    }else{ *DocumentRoot = "./documentos/"; *Maxclients = 5; *Pagina = "index.html"; *ip = "";}
 }
 
 //Metodo que lee el método del mensaje HTTP recibido

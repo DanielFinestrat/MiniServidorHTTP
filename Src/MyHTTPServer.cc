@@ -2,6 +2,7 @@
 #include <sys/socket.h>
 #include <sys/mman.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -55,14 +56,15 @@ int main(int argc, char *argv[]){
 	string pagina;          //Pagina que por defecto que se envia si no se indica otra
 	int maxclients;         //Es el número maximo de procesos que lanzará el servidor
 	int puerto = 6000;      //Puerto en el que escuchará el servidor (Por defecto 6000)
+	string ip = "";		//La ip/interfaz que escogemos
 
 
 	//Manejamos los argumentos, si no hay ruta del fichero establecida, devolvera un string vacio ("")
 	if(manageArguments(argc, argv, rutaConf, puerto) == 1) return 1;
 	
-	leerDatos(rutaConf, &documentRoot, &maxclients, &puerto, &pagina);
+	leerDatos(rutaConf, &documentRoot, &maxclients, &puerto, &pagina, &ip);
 	//Prueba de que funciona
-	cout<< "SrvrMsg----> Datos configuracion -- DocRot: " << documentRoot <<" MaxClients: "<<maxclients<<" Puerto: "<<puerto<<" Pagina: "<<pagina<<endl;
+	cout<< "SrvrMsg----> Datos configuracion -- DocRot: " << documentRoot <<" MaxClients: "<<maxclients<<" Puerto: "<<puerto<<" Pagina: "<<pagina<<" IP: "<<ip<<endl;
 
 	contHijos = (int*)mmap(NULL, sizeof *contHijos, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);	
 	*contHijos = maxclients; //Inicializamos el contador de hijos disponibles al maximo
@@ -76,7 +78,8 @@ int main(int argc, char *argv[]){
    	struct sockaddr_in Direccion, Cliente;
     	Direccion.sin_family = AF_INET;
     	Direccion.sin_port = htons(puerto);
-    	Direccion.sin_addr.s_addr = INADDR_ANY;
+    	//Direccion.sin_addr.s_addr = INADDR_ANY;
+	if (ip == "")Direccion.sin_addr.s_addr = INADDR_ANY; else Direccion.sin_addr.s_addr = inet_addr(const_cast<char*>(ip.c_str()));
 
 	if(bind(miSocket, (struct sockaddr *)&Direccion, sizeof (Direccion)) == -1){
 		cout << "SrvrMsg----> Error. No se puede asociar el puerto al socket\n\r" ;

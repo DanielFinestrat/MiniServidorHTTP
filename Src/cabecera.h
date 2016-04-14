@@ -4,7 +4,7 @@ using namespace std;
 
 int manageArguments(int argc, char *argv[], string &rutaConf, int &puerto);
 int inicializarSocket();
-void leerDatos(string archivo, string* DocumentRoot, int* Maxclients, int* Puerto, string* Pagina);
+void leerDatos(string archivo, string* DocumentRoot, int* Maxclients, int* Puerto, string* Pagina, string* ip);
 int ver_metodo(char mensaje[]);
 string ver_uri(char mensaje[], string* Pagina);
 int existeArchivo (string filename, string directorio);
