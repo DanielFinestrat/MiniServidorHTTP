@@ -13,7 +13,7 @@
 #include <string.h>
 #include <sstream>
 
-// comprueba que la ruta no sea PROOOHIIBIIIIDAAA
+// comprueba que la ruta no sea prohibida
 bool checkNombres(string ruta) {
 	if (ruta != "boo2.gif" &&
 	ruta != "Boo.html" &&
@@ -28,8 +28,7 @@ bool checkNombres(string ruta) {
 	ruta != "Err505.html" &&
 	ruta != "favicon.ico" &&
 	ruta != "index.html" &&
-	ruta != "PutCompleto.html")
-		return true;
+	ruta != "PutCompleto.html"){ cout << "SrvrMsg----> La ruta esta prohibida"<<endl; return true;}
 	else
 		return false;
 }
@@ -56,6 +55,7 @@ string tratarPeticion(string root,int metodo,string uri,string contentType, stri
 				fs.close();
 				if (existeArchivo (uri,root) == 0){ doc = construirRespuestaError(500,root,""); return doc;}
 				fich = parsearFicheroGET(root+"PutCompleto.html");
+				cout << "SrvrMsg----> Hemos creado el fichero correctamente"<<endl;
 			} else {
 				doc = construirRespuestaError(403,root,"");
 				return doc;
@@ -71,6 +71,7 @@ string tratarPeticion(string root,int metodo,string uri,string contentType, stri
 					return doc;
 				} else {
 					fich = parsearFicheroGET(root+"DeleteCompleto.html");
+					cout << "SrvrMsg----> Hemos borrado el fichero correctamente"<<endl;
 				}
 			} else {
 				doc = construirRespuestaError(403,root,"");

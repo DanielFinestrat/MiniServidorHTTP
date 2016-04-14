@@ -82,7 +82,7 @@ int ver_metodo(char mensaje[]){
 }
 
 //Metodo que devuelve el uri que se pide en la peticion HTTP
-string ver_uri(char mensaje[]){
+string ver_uri(char mensaje[], string* Pagina){
 	string uri = "";
 	int contador = 0;
 	bool guardar = false;
@@ -107,7 +107,7 @@ string ver_uri(char mensaje[]){
 			contador++;
 		}
 	}
-	if (uri=="") uri="index.html";
+	if (uri=="") uri = *Pagina;
 	return uri;
 }
 

@@ -144,7 +144,7 @@ int main(int argc, char *argv[]){
 				}
 
 				//2.- URI valida. (0 = No existe el fichero 1 = Si existe)
-				string uri = ver_uri(mensaje);
+				string uri = ver_uri(mensaje, &pagina);
 				int existe = existeArchivo(uri, documentRoot);
 				cout<< "SrvrMsg----> Uri: " << uri <<" Existe: "<<existe<<endl;
 				if(!existe && metodo != 3){ //Doc pedido no existe y no estamos usando PUT, error 404.
