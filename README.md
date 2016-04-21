@@ -47,7 +47,7 @@ Por ejemplo:
     127.0.0.1
 
 
-# Istrucciones de configuración del repositorio en Ubuntu:
+# Instrucciones de configuración del repositorio en Ubuntu:
 
 1.- Descargar Git: 
 
